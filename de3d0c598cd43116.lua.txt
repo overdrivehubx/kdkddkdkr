@@ -1,0 +1,746 @@
+
+local _Players = game:GetService('Players')
+local _LocalPlayer = _Players.LocalPlayer
+local _ScreenGui = Instance.new('ScreenGui')
+
+_ScreenGui.Name = 'TradeRequestButton'
+_ScreenGui.Parent = _LocalPlayer:WaitForChild('PlayerGui')
+
+local _Frame = Instance.new('Frame')
+
+_Frame.Name = 'TradeControlPanel'
+_Frame.Size = UDim2.new(0, 180, 0, 320)
+_Frame.Position = UDim2.new(0, 10, 0, 100)
+_Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+_Frame.BackgroundTransparency = 0.1
+_Frame.BorderSizePixel = 0
+_Frame.ZIndex = 5
+
+local _UICorner = Instance.new('UICorner')
+
+_UICorner.CornerRadius = UDim.new(0, 12)
+_UICorner.Parent = _Frame
+
+local _UIStroke = Instance.new('UIStroke')
+
+_UIStroke.Color = Color3.fromRGB(60, 60, 80)
+_UIStroke.Thickness = 2
+_UIStroke.Parent = _Frame
+_Frame.Parent = _ScreenGui
+
+local _TextButton = Instance.new('TextButton')
+
+_TextButton.Name = 'StartVisualTradeRequest'
+_TextButton.Size = UDim2.new(0, 160, 0, 35)
+_TextButton.Position = UDim2.new(0, 10, 0, 10)
+_TextButton.BackgroundColor3 = Color3.fromRGB(85, 170, 85)
+_TextButton.BorderSizePixel = 0
+_TextButton.Text = 'START TRADE (5)'
+_TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+_TextButton.Font = Enum.Font.GothamBold
+_TextButton.TextSize = 14
+_TextButton.ZIndex = 10
+
+local _UICorner2 = Instance.new('UICorner')
+
+_UICorner2.CornerRadius = UDim.new(0, 8)
+_UICorner2.Parent = _TextButton
+
+local _UIStroke2 = Instance.new('UIStroke')
+
+_UIStroke2.Color = Color3.fromRGB(60, 140, 60)
+_UIStroke2.Thickness = 2
+_UIStroke2.Parent = _TextButton
+_TextButton.Parent = _Frame
+
+local _Frame2 = Instance.new('Frame')
+
+_Frame2.Name = 'SpectatorSelection'
+_Frame2.Size = UDim2.new(0, 160, 0, 25)
+_Frame2.Position = UDim2.new(0, 10, 0, 50)
+_Frame2.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+_Frame2.BackgroundTransparency = 0.1
+_Frame2.BorderSizePixel = 0
+_Frame2.ZIndex = 10
+
+local _UICorner3 = Instance.new('UICorner')
+
+_UICorner3.CornerRadius = UDim.new(0, 6)
+_UICorner3.Parent = _Frame2
+_Frame2.Parent = _Frame
+
+local u12 = {}
+
+for v13 = 1, 5 do
+    local v14 = v13
+    local _TextButton2 = Instance.new('TextButton')
+
+    _TextButton2.Name = 'Spectator' .. v14
+    _TextButton2.Size = UDim2.new(0, 28, 0, 20)
+    _TextButton2.Position = UDim2.new(0, 5 + (v14 - 1) * 31, 0, 2)
+    _TextButton2.BackgroundColor3 = v14 == 5 and Color3.fromRGB(85, 170, 85) or Color3.fromRGB(80, 80, 80)
+    _TextButton2.BorderSizePixel = 0
+    _TextButton2.Text = tostring(v14)
+    _TextButton2.TextColor3 = Color3.fromRGB(255, 255, 255)
+    _TextButton2.Font = Enum.Font.GothamBold
+    _TextButton2.TextSize = 10
+    _TextButton2.ZIndex = 11
+
+    local _UICorner4 = Instance.new('UICorner')
+
+    _UICorner4.CornerRadius = UDim.new(0, 4)
+    _UICorner4.Parent = _TextButton2
+    _TextButton2.Parent = _Frame2
+    u12[v14] = _TextButton2
+end
+
+local _TextButton3 = Instance.new('TextButton')
+
+_TextButton3.Name = 'AddRandomPetButton'
+_TextButton3.Size = UDim2.new(0, 160, 0, 25)
+_TextButton3.Position = UDim2.new(0, 10, 0, 80)
+_TextButton3.BackgroundColor3 = Color3.fromRGB(220, 120, 50)
+_TextButton3.BorderSizePixel = 0
+_TextButton3.Text = 'ADD PET'
+_TextButton3.TextColor3 = Color3.fromRGB(255, 255, 255)
+_TextButton3.Font = Enum.Font.GothamBold
+_TextButton3.TextSize = 11
+_TextButton3.ZIndex = 10
+
+local _UICorner5 = Instance.new('UICorner')
+
+_UICorner5.CornerRadius = UDim.new(0, 6)
+_UICorner5.Parent = _TextButton3
+
+local _UIStroke3 = Instance.new('UIStroke')
+
+_UIStroke3.Color = Color3.fromRGB(180, 80, 30)
+_UIStroke3.Thickness = 1
+_UIStroke3.Parent = _TextButton3
+_TextButton3.Parent = _Frame
+
+local _TextButton4 = Instance.new('TextButton')
+
+_TextButton4.Name = 'RemovePetButton'
+_TextButton4.Size = UDim2.new(0, 160, 0, 25)
+_TextButton4.Position = UDim2.new(0, 10, 0, 110)
+_TextButton4.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+_TextButton4.BorderSizePixel = 0
+_TextButton4.Text = 'REMOVE PET'
+_TextButton4.TextColor3 = Color3.fromRGB(255, 255, 255)
+_TextButton4.Font = Enum.Font.GothamBold
+_TextButton4.TextSize = 11
+_TextButton4.ZIndex = 10
+
+local _UICorner6 = Instance.new('UICorner')
+
+_UICorner6.CornerRadius = UDim.new(0, 6)
+_UICorner6.Parent = _TextButton4
+
+local _UIStroke4 = Instance.new('UIStroke')
+
+_UIStroke4.Color = Color3.fromRGB(150, 40, 40)
+_UIStroke4.Thickness = 1
+_UIStroke4.Parent = _TextButton4
+_TextButton4.Parent = _Frame
+
+local _Frame3 = Instance.new('Frame')
+
+_Frame3.Name = 'PlayerSelectionSection'
+_Frame3.Size = UDim2.new(0, 160, 0, 150)
+_Frame3.Position = UDim2.new(0, 10, 0, 140)
+_Frame3.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+_Frame3.BorderSizePixel = 0
+_Frame3.ZIndex = 10
+
+local _UICorner7 = Instance.new('UICorner')
+
+_UICorner7.CornerRadius = UDim.new(0, 8)
+_UICorner7.Parent = _Frame3
+
+local _UIStroke5 = Instance.new('UIStroke')
+
+_UIStroke5.Color = Color3.fromRGB(70, 70, 90)
+_UIStroke5.Thickness = 1
+_UIStroke5.Parent = _Frame3
+_Frame3.Parent = _Frame
+
+local _TextLabel = Instance.new('TextLabel')
+
+_TextLabel.Name = 'PlayerSelectTitle'
+_TextLabel.Size = UDim2.new(1, 0, 0, 20)
+_TextLabel.Position = UDim2.new(0, 0, 0, 0)
+_TextLabel.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
+_TextLabel.BorderSizePixel = 0
+_TextLabel.Text = 'SELECT PLAYER'
+_TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+_TextLabel.Font = Enum.Font.GothamBold
+_TextLabel.TextSize = 11
+_TextLabel.ZIndex = 11
+_TextLabel.Parent = _Frame3
+
+local _UICorner8 = Instance.new('UICorner')
+
+_UICorner8.CornerRadius = UDim.new(0, 8)
+_UICorner8.Parent = _TextLabel
+
+local _ScrollingFrame = Instance.new('ScrollingFrame')
+
+_ScrollingFrame.Name = 'PlayerList'
+_ScrollingFrame.Size = UDim2.new(1, -10, 1, -25)
+_ScrollingFrame.Position = UDim2.new(0, 5, 0, 20)
+_ScrollingFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+_ScrollingFrame.BorderSizePixel = 0
+_ScrollingFrame.ScrollBarThickness = 4
+_ScrollingFrame.ZIndex = 11
+_ScrollingFrame.Parent = _Frame3
+
+local _UIListLayout = Instance.new('UIListLayout')
+
+_UIListLayout.Padding = UDim.new(0, 2)
+_UIListLayout.Parent = _ScrollingFrame
+
+local _TextLabel2 = Instance.new('TextLabel')
+
+_TextLabel2.Name = 'SelectedPlayerLabel'
+_TextLabel2.Size = UDim2.new(0, 160, 0, 15)
+_TextLabel2.Position = UDim2.new(0, 10, 0, 295)
+_TextLabel2.BackgroundTransparency = 1
+_TextLabel2.Text = 'AdoptMe_Fan'
+_TextLabel2.TextColor3 = Color3.fromRGB(255, 255, 255)
+_TextLabel2.Font = Enum.Font.Gotham
+_TextLabel2.TextSize = 10
+_TextLabel2.ZIndex = 10
+_TextLabel2.Parent = _Frame
+
+local _TextLabel3 = Instance.new('TextLabel')
+
+_TextLabel3.Name = 'SelectedPlayerIdLabel'
+_TextLabel3.Size = UDim2.new(0, 160, 0, 12)
+_TextLabel3.Position = UDim2.new(0, 10, 0, 310)
+_TextLabel3.BackgroundTransparency = 1
+_TextLabel3.Text = 'ID: 123456'
+_TextLabel3.TextColor3 = Color3.fromRGB(200, 200, 200)
+_TextLabel3.Font = Enum.Font.Gotham
+_TextLabel3.TextSize = 9
+_TextLabel3.ZIndex = 10
+_TextLabel3.Parent = _Frame
+
+local u32 = 5
+local u33 = 'AdoptMe_Fan'
+local u34 = 123456
+local u35 = {
+    'ugc_refresh_2023_african_wild_dog',
+    'albino_monkey',
+    'arctic_reindeer',
+    'summerfest_2024_balloon_unicorn',
+    'bat_dragon',
+    'lures_2023_blazing_lion',
+    'easter_2024_candyfloss_chick',
+    'crow',
+    'frost_dragon',
+    'giraffe',
+    'pride_2022_goat',
+    'springfest_2023_hare',
+    'elf_hedgehog',
+    'owl',
+    'parrot',
+    'winter_2023_peppermint_penguin',
+    'shadow_dragon',
+    'summerfest_2023',
+    'meme_2023_sheeeeep',
+    'winter_2022_strawberry_shortcake_bat_dragon',
+}
+
+local function u38(p36)
+    u32 = p36
+    _TextButton.Text = 'START TRADE (' .. u32 .. ')'
+
+    for v37 = 1, 5 do
+        u12[v37].BackgroundColor3 = v37 == p36 and Color3.fromRGB(85, 170, 85) or Color3.fromRGB(80, 80, 80)
+    end
+end
+local function v57()
+    local v39 = _ScrollingFrame
+    local v40, v41, v42 = ipairs(v39:GetChildren())
+
+    while true do
+        local v43
+
+        v42, v43 = v40(v41, v42)
+
+        if v42 == nil then
+            break
+        end
+        if v43:IsA('TextButton') then
+            v43:Destroy()
+        end
+    end
+
+    local v44 = _Players
+    local v45, v46, v47 = ipairs(v44:GetPlayers())
+
+    while true do
+        local u48
+
+        v47, u48 = v45(v46, v47)
+
+        if v47 == nil then
+            break
+        end
+        if u48 ~= _LocalPlayer then
+            local _TextButton5 = Instance.new('TextButton')
+
+            _TextButton5.Name = 'Player_' .. u48.UserId
+            _TextButton5.Size = UDim2.new(1, 0, 0, 30)
+            _TextButton5.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+            _TextButton5.BorderSizePixel = 0
+            _TextButton5.Text = u48.Name
+            _TextButton5.TextColor3 = Color3.fromRGB(255, 255, 255)
+            _TextButton5.Font = Enum.Font.Gotham
+            _TextButton5.TextSize = 10
+            _TextButton5.TextWrapped = true
+            _TextButton5.ZIndex = 12
+
+            local _UICorner9 = Instance.new('UICorner')
+
+            _UICorner9.CornerRadius = UDim.new(0, 4)
+            _UICorner9.Parent = _TextButton5
+
+            _TextButton5.MouseButton1Click:Connect(function()
+                u33 = u48.Name
+                u34 = u48.UserId
+                _TextLabel2.Text = u33
+                _TextLabel3.Text = 'ID: ' .. u34
+
+                print('\u{fffd}\u{fffd} Selected player: ' .. u33 .. ' (ID: ' .. u34 .. ')')
+            end)
+
+            _TextButton5.Parent = _ScrollingFrame
+        end
+    end
+
+    local v51, v52, v53 = ipairs({
+        {
+            Name = 'cammyxboba',
+            UserId = 901819690,
+        },
+        {
+            Name = 'rainbowriley321',
+            UserId = 154241943,
+        },
+        {
+            Name = 'roplexyoutube',
+            UserId = 1676706728,
+        },
+        {
+            Name = 'j3llynoah',
+            UserId = 9190499461,
+        },
+    })
+
+    while true do
+        local u54
+
+        v53, u54 = v51(v52, v53)
+
+        if v53 == nil then
+            break
+        end
+
+        local _TextButton6 = Instance.new('TextButton')
+
+        _TextButton6.Name = 'Custom_' .. u54.Name
+        _TextButton6.Size = UDim2.new(1, 0, 0, 30)
+        _TextButton6.BackgroundColor3 = Color3.fromRGB(85, 107, 47)
+        _TextButton6.BorderSizePixel = 0
+        _TextButton6.Text = u54.Name
+        _TextButton6.TextColor3 = Color3.fromRGB(255, 255, 255)
+        _TextButton6.Font = Enum.Font.Gotham
+        _TextButton6.TextSize = 10
+        _TextButton6.TextWrapped = true
+        _TextButton6.ZIndex = 12
+
+        local _UICorner10 = Instance.new('UICorner')
+
+        _UICorner10.CornerRadius = UDim.new(0, 4)
+        _UICorner10.Parent = _TextButton6
+
+        _TextButton6.MouseButton1Click:Connect(function()
+            u33 = u54.Name
+            u34 = u54.UserId
+            _TextLabel2.Text = u33
+            _TextLabel3.Text = 'ID: ' .. u34
+
+            print('\u{fffd}\u{fffd} Selected custom player: ' .. u33 .. ' (ID: ' .. u34 .. ')')
+        end)
+
+        _TextButton6.Parent = _ScrollingFrame
+    end
+
+    _ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, _UIListLayout.AbsoluteContentSize.Y)
+end
+local function u68()
+    local _TradeApp = require(game.ReplicatedStorage:WaitForChild('Fsys')).load('UIManager').apps.TradeApp
+
+    if _TradeApp and _TradeApp:_get_local_trade_state() then
+        local v59 = _TradeApp:_get_local_trade_state()
+        local v60 = v59.sender_offer.items or {}
+        local v61 = u35[math.random(1, #u35)]
+        local v62 = {
+            {
+                mega_neon = true,
+                flyable = true,
+                rideable = true,
+            },
+            {
+                neon = true,
+                flyable = true,
+                rideable = true,
+            },
+            {
+                flyable = true,
+                rideable = true,
+            },
+        }
+        local v63 = v62[math.random(1, #v62)]
+        local v64 = {
+            unique = 'pet_' .. v61 .. '_' .. math.random(10000, 99999),
+            category = 'pets',
+            kind = v61,
+            properties = v63,
+        }
+
+        table.insert(v60, v64)
+        _TradeApp:_change_local_trade_state({
+            sender_offer = {
+                items = v60,
+                negotiated = v59.sender_offer.negotiated,
+                confirmed = v59.sender_offer.confirmed,
+                player_name = v59.sender_offer.player_name,
+            },
+        })
+        _TradeApp:refresh_all()
+        _TradeApp:_lock_trade_for_appropriate_time()
+
+        local v65 = v63.mega_neon and 'MFR' or (v63.neon and 'NFR' or 'FR')
+
+        _TradeApp:_render_message_in_trade_chat(nil, u33 .. ' added ' .. v65 .. ' ' .. v61:gsub('_', ' '):gsub("(%a)([%w_']*)", function(p66, p67)
+            return p66:upper() .. p67:lower()
+        end), false, true)
+        print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Added ' .. v65 .. ' ' .. v61 .. " to partner's offer! (5-second lock activated)")
+    else
+        print('\u{fffd}\u{fffd} No active trade found! Start a trade first.')
+    end
+end
+local function u76()
+    local _TradeApp2 = require(game.ReplicatedStorage:WaitForChild('Fsys')).load('UIManager').apps.TradeApp
+
+    if _TradeApp2 and _TradeApp2:_get_local_trade_state() then
+        local v70 = _TradeApp2:_get_local_trade_state()
+        local v71 = v70.sender_offer.items or {}
+
+        if #v71 <= 0 then
+            print("\u{fffd}\u{fffd} No pets to remove from partner's offer!")
+        else
+            local v72 = table.remove(v71)
+
+            _TradeApp2:_change_local_trade_state({
+                sender_offer = {
+                    items = v71,
+                    negotiated = v70.sender_offer.negotiated,
+                    confirmed = v70.sender_offer.confirmed,
+                    player_name = v70.sender_offer.player_name,
+                },
+            })
+            _TradeApp2:refresh_all()
+            _TradeApp2:_lock_trade_for_appropriate_time()
+
+            local v73 = v72.properties.mega_neon and 'MFR' or (v72.properties.neon and 'NFR' or 'FR')
+
+            _TradeApp2:_render_message_in_trade_chat(nil, u33 .. ' removed ' .. v73 .. ' ' .. v72.kind:gsub('_', ' '):gsub("(%a)([%w_']*)", function(p74, p75)
+                return p74:upper() .. p75:lower()
+            end), false, true)
+            print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fe0f} Removed ' .. v73 .. ' ' .. v72.kind .. " from partner's offer! (5-second lock activated)")
+        end
+    else
+        print('\u{fffd}\u{fffd} No active trade found! Start a trade first.')
+    end
+end
+
+local u77 = u32
+local u78 = u34
+local u79 = u33
+
+for v80 = 1, 5 do
+    local u81 = v80
+
+    u12[u81].MouseButton1Click:Connect(function()
+        u38(u81)
+    end)
+end
+
+_TextButton3.MouseButton1Click:Connect(function()
+    u68()
+end)
+_TextButton4.MouseButton1Click:Connect(function()
+    u76()
+end)
+
+local function u109()
+    local u82 = require(game.ReplicatedStorage:WaitForChild('Fsys'))
+    local u83 = {
+        Name = u79,
+        UserId = u78,
+        DisplayName = u79,
+    }
+    local v84 = u82.load('UIManager').apps.DialogApp:dialog({
+        text = string.format('%s sent you a trade request', u83.Name),
+        left = 'Decline',
+        right = 'Accept',
+    })
+
+    print('Trade request response:', v84)
+
+    if v84 == 'Accept' then
+        local _UIManager = u82.load('UIManager')
+        local _TradeApp3 = _UIManager.apps.TradeApp
+
+        if _TradeApp3 then
+            local v87 = {
+                trade_id = 'visual_trade_' .. math.random(10000, 99999),
+                sender = u83,
+                recipient = _LocalPlayer,
+                sender_offer = {
+                    items = {},
+                    negotiated = false,
+                    confirmed = false,
+                    player_name = u83.Name,
+                },
+                recipient_offer = {
+                    items = {},
+                    negotiated = false,
+                    confirmed = false,
+                    player_name = _LocalPlayer.Name,
+                },
+                current_stage = 'negotiation',
+                offer_version = 1,
+                sender_has_trade_license = true,
+                recipient_has_trade_license = true,
+                busy_indicators = {},
+                subscriber_count = u77,
+            }
+
+            print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Setting up COMPLETELY EMPTY trade with ' .. u77 .. ' spectators...')
+            print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Trading with: ' .. u79 .. ' (ID: ' .. u78 .. ')')
+            _TradeApp3:_overwrite_local_trade_state(v87)
+            _UIManager.set_app_visibility('TradeApp', true)
+            wait(0.5)
+            _TradeApp3:refresh_all()
+            print('\u{fffd}\u{fffd} Trade window opened - COMPLETELY EMPTY!')
+            print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} You can now:')
+            print('   \u{2022} Click ADD PET to add pets to partner (5-second lock)')
+            print('   \u{2022} Click REMOVE PET to remove pets from partner (5-second lock)')
+            print('   \u{2022} Click the + button in trade to add your own items')
+            print('   \u{2022} Click on any item in the trade to remove it')
+            print('   \u{2022} Click Accept when ready')
+            print('   \u{2022} Trade will auto-progress')
+
+            local __on_accept_pressed = _TradeApp3._on_accept_pressed
+            local __on_confirm_pressed = _TradeApp3._on_confirm_pressed
+            local __remove_item_from_my_offer = _TradeApp3._remove_item_from_my_offer
+
+            function _TradeApp3._remove_item_from_my_offer(p91, p92)
+                print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Removing item using ORIGINAL GAME METHOD:', p92.unique)
+
+                local v93 = p91:_get_local_trade_state()
+                local v94 = v93.sender_offer.items or {}
+                local _ = v93.recipient_offer.items
+                local v95, v96, v97 = ipairs(v94)
+                local v98 = false
+                local v99 = nil
+
+                while true do
+                    local v100
+
+                    v97, v100 = v95(v96, v97)
+
+                    if v97 == nil then
+                        v97 = v99
+
+                        break
+                    end
+                    if v100.unique == p92.unique then
+                        v98 = true
+
+                        break
+                    end
+                end
+
+                if v98 and v97 then
+                    print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fe0f} Removing partner item using original method')
+                    table.remove(v94, v97)
+                    p91:_change_local_trade_state({
+                        sender_offer = {
+                            items = v94,
+                            negotiated = v93.sender_offer.negotiated,
+                            confirmed = v93.sender_offer.confirmed,
+                            player_name = v93.sender_offer.player_name,
+                        },
+                    })
+                    p91:_lock_trade_for_appropriate_time()
+                    p91:refresh_all()
+                    p91:_render_message_in_trade_chat(nil, u79 .. ' removed ' .. p92.kind:gsub('_', ' '):gsub("(%a)([%w_']*)", function(p101, p102)
+                        return p101:upper() .. p102:lower()
+                    end), false, true)
+                    print('\u{fffd}\u{fffd} SUCCESS! Removed ' .. p92.kind .. " from partner's offer using original method!")
+                else
+                    print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fe0f} Removing your item using original method')
+                end
+            end
+            function _TradeApp3._on_accept_pressed(_)
+                print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} User clicked Accept!')
+
+                local v103 = _TradeApp3:_get_local_trade_state()
+
+                if v103 then
+                    local v104 = {
+                        recipient_offer = {
+                            items = v103.recipient_offer.items,
+                            negotiated = true,
+                            confirmed = false,
+                            player_name = _LocalPlayer.Name,
+                        },
+                    }
+
+                    _TradeApp3:_change_local_trade_state(v104)
+                    _TradeApp3:refresh_all()
+                    print('\u{fffd}\u{fffd} You accepted! Auto-accepting partner in 2 seconds...')
+                    wait(2)
+
+                    local v105 = {
+                        sender_offer = {
+                            items = v103.sender_offer.items,
+                            negotiated = true,
+                            confirmed = false,
+                            player_name = u83.Name,
+                        },
+                        current_stage = 'confirmation',
+                        offer_version = v103.offer_version + 1,
+                        subscriber_count = u77,
+                    }
+
+                    _TradeApp3:_change_local_trade_state(v105)
+                    _TradeApp3:refresh_all()
+                    print('\u{fffd}\u{fffd} BOTH ACCEPTED! Now in confirmation stage.')
+
+                    function _TradeApp3._on_confirm_pressed(_)
+                        print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} User clicked Confirm!')
+
+                        local v106 = _TradeApp3:_get_local_trade_state()
+
+                        if v106 then
+                            local v107 = {
+                                recipient_offer = {
+                                    items = v106.recipient_offer.items,
+                                    negotiated = true,
+                                    confirmed = true,
+                                    player_name = _LocalPlayer.Name,
+                                },
+                            }
+
+                            _TradeApp3:_change_local_trade_state(v107)
+                            _TradeApp3:refresh_all()
+                            print('\u{fffd}\u{fffd} You confirmed! Auto-confirming partner in 2 seconds...')
+                            wait(2)
+
+                            local v108 = {
+                                sender_offer = {
+                                    items = v106.sender_offer.items,
+                                    negotiated = true,
+                                    confirmed = true,
+                                    player_name = u83.Name,
+                                },
+                                subscriber_count = u77,
+                            }
+
+                            _TradeApp3:_change_local_trade_state(v108)
+                            _TradeApp3:refresh_all()
+                            print('\u{fffd}\u{fffd} BOTH CONFIRMED! Finishing trade...')
+                            wait(2)
+                            pcall(function()
+                                if _TradeApp3.frame and _TradeApp3.frame.Parent then
+                                    _TradeApp3.frame:Destroy()
+                                    print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fe0f} Trade UI destroyed!')
+                                end
+
+                                _TradeApp3:hide()
+                                _TradeApp3:_overwrite_local_trade_state(nil)
+
+                                _TradeApp3._on_accept_pressed = __on_accept_pressed
+                                _TradeApp3._on_confirm_pressed = __on_confirm_pressed
+                                _TradeApp3._remove_item_from_my_offer = __remove_item_from_my_offer
+                            end)
+                            u82.load('UIManager').apps.HintApp:hint({
+                                text = 'The trade was successful!',
+                                length = 3,
+                                overridable = true,
+                            })
+                            print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Trade finished!')
+                        end
+                    end
+                end
+            end
+
+            delay(60, function()
+                if _TradeApp3._on_accept_pressed ~= __on_accept_pressed then
+                    _TradeApp3._on_accept_pressed = __on_accept_pressed
+
+                    print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Trade timeout - methods restored')
+                end
+                if _TradeApp3._on_confirm_pressed ~= __on_confirm_pressed then
+                    _TradeApp3._on_confirm_pressed = __on_confirm_pressed
+                end
+                if _TradeApp3._remove_item_from_my_offer ~= __remove_item_from_my_offer then
+                    _TradeApp3._remove_item_from_my_offer = __remove_item_from_my_offer
+                end
+            end)
+        else
+            print('\u{fffd}\u{fffd} TradeApp not found')
+        end
+    else
+        print('\u{fffd}\u{fffd} Trade declined!')
+    end
+end
+
+_TextButton.MouseButton1Click:Connect(function()
+    u109()
+end)
+_TextButton.MouseEnter:Connect(function()
+    _TextButton.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+end)
+_TextButton.MouseLeave:Connect(function()
+    _TextButton.BackgroundColor3 = Color3.fromRGB(85, 170, 85)
+end)
+_TextButton3.MouseEnter:Connect(function()
+    _TextButton3.BackgroundColor3 = Color3.fromRGB(240, 140, 70)
+end)
+_TextButton3.MouseLeave:Connect(function()
+    _TextButton3.BackgroundColor3 = Color3.fromRGB(220, 120, 50)
+end)
+_TextButton4.MouseEnter:Connect(function()
+    _TextButton4.BackgroundColor3 = Color3.fromRGB(220, 80, 80)
+end)
+_TextButton4.MouseLeave:Connect(function()
+    _TextButton4.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+end)
+u38(5)
+v57()
+print('\u{fffd}\u{fffd} COMPACT Trade UI created!')
+print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Click numbers 1-5 to choose spectators')
+print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Click any player name in the list to select trade partner')
+print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Click ADD PET to add pets to partner (5-second lock)')
+print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fe0f} Click REMOVE PET to remove pets from partner (5-second lock)')
+print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fe0f} Click on any item in the trade to remove it')
+print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Click START TRADE to begin')
+print('\u{fffd}\u{fffd}\u{fffd}\u{fffd}\u{fffd} Click the username in trade to open their Adopt Me profile!')
